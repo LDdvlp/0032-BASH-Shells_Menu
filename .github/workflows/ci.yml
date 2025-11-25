@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies (ShellCheck, BATS, Make)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck bats make
+
+      - name: Run CI (make ci)
+        run: make ci
+
+# Cette CI fait au fond la même chose que toi en local : make ci.
+

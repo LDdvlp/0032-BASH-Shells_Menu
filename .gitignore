@@ -1,0 +1,10 @@
+# Éditeurs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Divers
+*.log
+tmp/
