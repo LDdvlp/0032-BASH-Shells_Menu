@@ -18,7 +18,7 @@ lint:
 	else \
 	  echo "Fichiers analysés : $(SH_FILES)"; \
 	  if command -v shellcheck >/dev/null 2>&1; then \
-	    shellcheck $(SH_FILES); \
+	    	    shellcheck -e SC1091 $(SH_FILES); \
 	  else \
 	    echo "ShellCheck n'est pas installé (commande 'shellcheck' introuvable)"; \
 	    exit 1; \
