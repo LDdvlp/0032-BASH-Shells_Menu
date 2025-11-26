@@ -31,6 +31,8 @@ make test
 # Lancer le menu
 bin/menu.sh
 
+```
+
 ## Version
 
 Version actuelle : `v0.1.0-alpha.2`
