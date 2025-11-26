@@ -22,3 +22,37 @@ jobs:
 
 # Cette CI fait au fond la même chose que toi en local : make ci.
 
+  sonar:
+    needs: ci
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Java (required for SonarScanner)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          # Optionnel : si tu utilises SonarCloud avec une organisation
+          # SONAR_HOST_URL: "https://sonarcloud.io"
+        with:
+          args: >
+            -Dsonar.projectKey=0032-BASH-Shells_Menu
+            -Dsonar.organization=lddvlp
+
+
+        
