@@ -43,6 +43,17 @@ Idées possibles :
 
 ---
 
+### v0.1.0-alpha.3 (version en cours)
+
+Objectifs :
+
+- [x] Introduire une librairie Bash `lib/helpers.sh`.
+- [x] Ajouter une option non interactive `--env` qui utilise la librairie.
+- [ ] Ajouter une entrée de menu interactive pour afficher l'environnement (option future).
+
+---
+
+
 ## Phase Beta
 
 ### v0.2.0-beta.1

@@ -35,7 +35,10 @@ bin/menu.sh
 
 ## Version
 
-Version actuelle : `v0.1.0-alpha.2`
+## Version
+
+Version actuelle : `v0.1.0-alpha.3` (ajout de l’option `--env` et d'une librairie `lib/helpers.sh`).
+
 
 ### Historique rapide des versions
 

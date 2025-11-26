@@ -3,11 +3,17 @@
 @test "menu --version affiche la version et sort en 0" {
   run bash bin/menu.sh --version
   [ "$status" -eq 0 ]
-  [[ "$output" =~ 0.1.0-alpha.2 ]]
+  [[ "$output" =~ 0.1.0-alpha.3 ]]
 }
 
 @test "menu --help affiche un texte d'aide" {
   run bash bin/menu.sh --help
   [ "$status" -eq 0 ]
   [[ "$output" =~ "Usage" ]]
+}
+
+@test "menu --env affiche un environnement non vide et sort en 0" {
+  run bash bin/menu.sh --env
+  [ "$status" -eq 0 ]
+  [[ "$output" =~ "Environnement détecté :" ]]
 }

@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 # 0032-BASH-Shells_Menu - menu principal
-# Version : 0.1.0-alpha.1
+# Version : 0.1.0-alpha.3
 
 set -euo pipefail
 
 PROJECT_NAME="0032-BASH-Shells_Menu"
-PROJECT_VERSION="0.1.0-alpha.2"
+PROJECT_VERSION="0.1.0-alpha.3"
+
+# Déterminer le dossier racine du projet (un cran au-dessus de bin/)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# Indiquer à ShellCheck où se trouve le fichier source
+# shellcheck source=../lib/helpers.sh
+. "$SCRIPT_DIR/lib/helpers.sh"
+
 
 show_header() {
   clear || true
@@ -58,13 +66,24 @@ handle_cli_args() {
     --help|-h)
       echo "$PROJECT_NAME - v$PROJECT_VERSION"
       echo "Usage :"
-      echo "  bin/menu.sh         # mode interactif"
-      echo "  bin/menu.sh --help  # afficher cette aide"
-      echo "  bin/menu.sh --version # afficher la version"
+      echo "  bin/menu.sh             # mode interactif"
+      echo "  bin/menu.sh --help      # afficher cette aide"
+      echo "  bin/menu.sh --version   # afficher la version"
+      echo "  bin/menu.sh --ping      # test simple (retourne 0)"
+      echo "  bin/menu.sh --env       # afficher l'environnement détecté"
+      exit 0
+      ;;
+    --ping)
+      echo "pong"
+      exit 0
+      ;;
+    --env)
+      echo "Environnement détecté : $(detect_env)"
       exit 0
       ;;
   esac
 }
+
 
 main() {
   # Si un argument est passé (mode test / non interactif)
