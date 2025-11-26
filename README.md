@@ -30,3 +30,12 @@ make test
 
 # Lancer le menu
 bin/menu.sh
+
+## Version
+
+Version actuelle : `v0.1.0-alpha.2`
+
+### Historique rapide des versions
+
+- `v0.1.0-alpha.2` – ajout de l’option `--ping`, mise à jour des tests
+- `v0.1.0-alpha.1` – squelette minimal + menu simple + CI initiale
