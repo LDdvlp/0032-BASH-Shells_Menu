@@ -5,7 +5,7 @@
 set -euo pipefail
 
 PROJECT_NAME="0032-BASH-Shells_Menu"
-PROJECT_VERSION="0.1.0-alpha.1"
+PROJECT_VERSION="0.1.0-alpha.2"
 
 show_header() {
   clear || true
