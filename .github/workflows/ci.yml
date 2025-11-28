@@ -50,7 +50,7 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=LDdvlp_0032-BASH-Shells_Menu
-            -Dsonar.organization=VOTRE_ORG_KEY_ICI
+            -Dsonar.organization=lddvlp
 
 
 
