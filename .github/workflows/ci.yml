@@ -47,12 +47,11 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          # Optionnel : si tu utilises SonarCloud avec une organisation
-          # SONAR_HOST_URL: "https://sonarcloud.io"
         with:
           args: >
-            -Dsonar.projectKey=0032-BASH-Shells_Menu
-            -Dsonar.organization=lddvlp
+            -Dsonar.projectKey=LDdvlp_0032-BASH-Shells_Menu
+            -Dsonar.organization=VOTRE_ORG_KEY_ICI
+
 
 
         
