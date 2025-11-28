@@ -1,10 +1,22 @@
 # 0032-BASH-Shells_Menu
 
+## 🚦 Status & Quality
+
 [![CI](https://github.com/LDdvlp/0032-BASH-Shells_Menu/actions/workflows/ci.yml/badge.svg)](https://github.com/LDdvlp/0032-BASH-Shells_Menu/actions/workflows/ci.yml)
-[![Release / CD](https://github.com/LDdvlp/0032-BASH-Shells_Menu/actions/workflows/release.yml/badge.svg)](https://github.com/LDdvlp/0032-BASH-Shells_Menu/actions/workflows/release.yml)
-[![Latest Tag / Version](https://img.shields.io/github/v/tag/LDdvlp/0032-BASH-Shells_Menu?label=version)](https://github.com/LDdvlp/0032-BASH-Shells_Menu/tags)
-[![GitHub Releases](https://img.shields.io/github/v/release/LDdvlp/0032-BASH-Shells_Menu?include_prereleases&label=release)](https://github.com/LDdvlp/0032-BASH-Shells_Menu/releases)
-[![SonarCloud Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=LDdvlp_0032-BASH-Shells_Menu&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=LDdvlp_0032-BASH-Shells_Menu)
+[![CD Release](https://github.com/LDdvlp/0032-BASH-Shells_Menu/actions/workflows/release.yml/badge.svg)](https://github.com/LDdvlp/0032-BASH-Shells_Menu/actions/workflows/release.yml)
+[![Version](https://img.shields.io/github/v/tag/LDdvlp/0032-BASH-Shells_Menu?label=Latest%20Version)](https://github.com/LDdvlp/0032-BASH-Shells_Menu/tags)
+[![Release](https://img.shields.io/github/v/release/LDdvlp/0032-BASH-Shells_Menu?include_prereleases&label=Latest%20Release)](https://github.com/LDdvlp/0032-BASH-Shells_Menu/releases)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=LDdvlp_0032-BASH-Shells_Menu&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=LDdvlp_0032-BASH-Shells_Menu)
+
+## 🔍 SonarCloud – Metrics
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=LDdvlp_0032-BASH-Shells_Menu&metric=bugs)](https://sonarcloud.io/summary/new_code?id=LDdvlp_0032-BASH-Shells_Menu)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=LDdvlp_0032-BASH-Shells_Menu&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=LDdvlp_0032-BASH_Shells_Menu)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=LDdvlp_0032-BASH-Shells_Menu&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=LDdvlp_0032-BASH-Shells_Menu)
+[![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=LDdvlp_0032-BASH-Shells_Menu&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=LDdvlp_0032-BASH-Shells_Menu)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=LDdvlp_0032-BASH-Shells_Menu&metric=coverage)](https://sonarcloud.io/summary/new_code?id=LDdvlp_0032-BASH-Shells_Menu)
+
+
 
 
 Petit projet d'exemple pour apprendre à :
