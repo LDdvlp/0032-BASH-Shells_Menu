@@ -5,7 +5,7 @@
 set -euo pipefail
 
 PROJECT_NAME="0032-BASH-Shells_Menu"
-PROJECT_VERSION="0.1.0-alpha.4"
+PROJECT_VERSION="0.1.0-alpha.5"
 
 # Déterminer le dossier racine du projet (un cran au-dessus de bin/)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"

@@ -53,13 +53,23 @@ Objectifs :
 
 ---
 
-### v0.1.0-alpha.4 (version en cours)
+### v0.1.0-alpha.4
 
 Objectifs :
 
 - [x] Améliorer le menu interactif avec de vraies options utiles.
 - [x] Ajouter une entrée pour afficher l'environnement détecté.
 - [x] Ajouter un test BATS pour le menu interactif.
+
+---
+
+### v0.1.0-alpha.5 (version en cours)
+
+Objectifs :
+
+- [x] Ajouter un script `install.sh` pour installer le menu dans `$HOME/.menu-shells`.
+- [x] Ajouter un test BATS basique pour `install.sh`.
+- [x] Inclure `install.sh` dans le lint ShellCheck.
 
 ---
 

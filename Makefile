@@ -1,7 +1,8 @@
 SHELL := /usr/bin/env bash
 
 # Tous les scripts shell à analyser
-SH_FILES := $(wildcard bin/*.sh lib/*.sh)
+# SH_FILES := $(wildcard bin/*.sh lib/*.sh)
+SH_FILES := $(shell find bin lib -name '*.sh' 2>/dev/null)
 
 .PHONY: help lint test ci
 
