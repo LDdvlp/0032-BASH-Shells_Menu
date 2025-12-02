@@ -62,3 +62,9 @@ Version actuelle : `v0.1.0-alpha.5` (ajout d'un script d'installation install.sh
 - `v0.1.0-alpha.3` - ajout de l’option `--env` et d'une librairie `lib/helpers.sh`
 - `v0.1.0-alpha.2` – ajout de l’option `--ping`, mise à jour des tests
 - `v0.1.0-alpha.1` – squelette minimal + menu simple + CI initiale
+
+## Roadmap
+
+- Phase Alpha (`0.1.x`) : structure, CI/CD, installation, bases du menu.
+- Phase Beta (`0.2.x`) : stabilisation de l’ergonomie, fonctionnalités utiles au quotidien.
+- v1.0.0 : première version stable, documentée et prête à être utilisée en production personnelle.

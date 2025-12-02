@@ -32,6 +32,8 @@ Objectifs :
 - [x] Ajouter une CI GitHub de base (`.github/workflows/ci.yml`).
 - [x] Ajouter Dependabot pour suivre les GitHub Actions.
 
+---
+
 ### v0.1.0-alpha.2 (idées futures)
 
 Idées possibles :
@@ -73,22 +75,57 @@ Objectifs :
 
 ---
 
-## Phase Beta
+## Principe : Alpha vs Beta
 
-### v0.2.0-beta.1
+Alpha (0.1.x)
+→ explorer, structurer, installer, CI/CD, qualité, prototypes du menu
 
-- [ ] Stabiliser le menu pour qu'il soit utilisable par d'autres.
-- [ ] Documenter tous les cas d'usage dans le README.
-- [ ] Ajouter SonarQube/SonarCloud comme étape obligatoire dans la CI.
-- [ ] Collecter du feedback d'utilisateurs (bêta).
+Beta (0.2.x)
+→ stabiliser l’expérience utilisateur, fiabiliser le comportement, préparer une vraie v1.0.0 “produit”.
 
 ---
 
-## Version stable 1.0.0
+## Phase Beta – vers une 1.0.0 stable
 
-### v1.0.0
+À partir de la branche des versions `0.2.x`, l’objectif n’est plus seulement d’ajouter des briques,
+mais de stabiliser le comportement et de rendre le menu réellement utilisable au quotidien.
 
-- [ ] Menu considéré comme stable.
-- [ ] CI verte (lint, tests, SonarQube).
-- [ ] Changelog propre, releases GitHub publiées.
-- [ ] Prêt à être réutilisé comme "template" pour d'autres projets Bash.
+### v0.2.0-beta.1 – Beta initiale (stabilisation du cœur)
+
+Objectifs :
+
+- [ ] Figer la structure du menu principal :
+  - sections claires (Systèmes, Réseaux, Outils, Divers, Quitter),
+  - éviter de changer l’ergonomie d’une version à l’autre.
+- [ ] Améliorer la gestion des erreurs :
+  - messages d’erreur cohérents,
+  - codes de retour explicites (0 = OK, ≠0 = erreur).
+- [ ] Ajouter une option `--config` :
+  - lire éventuellement un fichier de configuration (ex. `~/.menu-shells/config`),
+  - préparer la possibilité de personnaliser certains éléments du menu.
+- [ ] Documenter clairement dans le README :
+  - comment installer (`install.sh`),
+  - comment lancer (`smenu` ou `~/.menu-shells/menu.sh`),
+  - ce que fait la Beta (et ce qu’elle ne fait pas encore).
+
+### v0.2.0-beta.2 – Beta “utilisable au quotidien”
+
+Objectifs :
+
+- [ ] Ajouter quelques entrées de menu réellement utiles au quotidien :
+  - ex. afficher l’IP locale,
+  - ex. afficher l’espace disque,
+  - ex. afficher les infos système de base.
+- [ ] Ajouter des tests BATS pour ces nouvelles entrées.
+- [ ] Vérifier le comportement dans différents environnements :
+  - Git Bash,
+  - WSL,
+  - Linux “classique”.
+- [ ] Nettoyer les TODOs et commentaires obsolètes dans le code.
+
+### Objectif final : v1.0.0
+
+- [ ] CI/CD stables (CI, release, SonarCloud, badges).
+- [ ] `install.sh` stable (installation simple, idempotente, éventuellement uninstall).
+- [ ] Menu principal stable et documenté.
+- [ ] Jeu de tests BATS suffisant pour éviter les régressions majeures.
