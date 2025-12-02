@@ -5,7 +5,7 @@
 set -euo pipefail
 
 PROJECT_NAME="0032-BASH-Shells_Menu"
-PROJECT_VERSION="0.1.0-alpha.3"
+PROJECT_VERSION="0.1.0-alpha.4"
 
 # Déterminer le dossier racine du projet (un cran au-dessus de bin/)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -25,34 +25,52 @@ EOF
 }
 
 show_menu() {
-  cat <<'EOF'
-1) Afficher un message de bienvenue
-2) Afficher la version
-q) Quitter
-
-Choix :
-EOF
+  echo "==============================="
+  echo "  $PROJECT_NAME - v$PROJECT_VERSION"
+  echo "==============================="
+  echo "1) Afficher la version"
+  echo "2) Ping (test simple)"
+  echo "3) Afficher l'environnement détecté"
+  echo "0) Quitter"
+  echo
+  printf "Votre choix : "
 }
 
+
 handle_choice() {
-  local choice="$1"
+  local choice="${1-}"
 
   case "$choice" in
     1)
-      echo "Bienvenue dans le Shells Menu (version $PROJECT_VERSION)"
+      echo
+      echo "Version actuelle : v$PROJECT_VERSION"
       ;;
     2)
-      echo "Version actuelle : $PROJECT_VERSION"
+      echo
+      echo "Ping..."
+      echo "pong"
       ;;
-    q|Q)
+    3)
+      echo
+      echo "Environnement détecté : $(detect_env)"
+      ;;
+    0)
+      echo
       echo "Au revoir !"
       exit 0
       ;;
     *)
-      echo "Choix invalide."
+      echo
+      echo "Choix invalide : '$choice'"
       ;;
   esac
+
+  echo
+  echo "Appuyez sur Entrée pour revenir au menu..."
+  # shellcheck disable=SC2162
+  read _ || true
 }
+
 
 # Mode non interactif pour les tests : --version / --help
 handle_cli_args() {
@@ -93,17 +111,15 @@ main() {
 
   # Mode interactif
   while true; do
-    show_header
     show_menu
-
-    # read -p ne marche pas partout, on fait simple
-    read -r choice
-
+    if ! read -r choice; then
+      echo
+      echo "Entrée interrompue, sortie du programme."
+      exit 0
+    fi
     handle_choice "$choice"
-
-    echo
-    read -rp "Appuie sur Entrée pour continuer..." _
   done
+
 }
 
 main "$@"

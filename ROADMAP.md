@@ -43,7 +43,7 @@ Idées possibles :
 
 ---
 
-### v0.1.0-alpha.3 (version en cours)
+### v0.1.0-alpha.3
 
 Objectifs :
 
@@ -53,6 +53,15 @@ Objectifs :
 
 ---
 
+### v0.1.0-alpha.4 (version en cours)
+
+Objectifs :
+
+- [x] Améliorer le menu interactif avec de vraies options utiles.
+- [x] Ajouter une entrée pour afficher l'environnement détecté.
+- [x] Ajouter un test BATS pour le menu interactif.
+
+---
 
 ## Phase Beta
 

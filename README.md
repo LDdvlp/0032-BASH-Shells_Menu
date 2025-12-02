@@ -54,12 +54,10 @@ bin/menu.sh
 
 ## Version
 
-## Version
-
-Version actuelle : `v0.1.0-alpha.3` (ajout de l’option `--env` et d'une librairie `lib/helpers.sh`).
-
+Version actuelle : `v0.1.0-alpha.4` (menu interactif amélioré : version, ping, environnement, quitter).
 
 ### Historique rapide des versions
 
+- `v0.1.0-alpha.3` - ajout de l’option `--env` et d'une librairie `lib/helpers.sh`
 - `v0.1.0-alpha.2` – ajout de l’option `--ping`, mise à jour des tests
 - `v0.1.0-alpha.1` – squelette minimal + menu simple + CI initiale
