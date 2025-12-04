@@ -37,11 +37,15 @@ jobs:
 
           # 2. Remplacer Version actuelle par la nouvelle
           sed -i "s|Version actuelle : \`.*\`|Version actuelle : \`${NEW_VERSION}\`|g" README.md
-
+      
       - name: Commit changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
           git add README.md
           git commit -m "docs(readme): mise à jour automatique version -> ${{ steps.version.outputs.version }}"
-          git push
+
+          # On pousse explicitement vers la branche main
+          git push origin HEAD:main
+
