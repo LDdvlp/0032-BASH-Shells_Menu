@@ -9,6 +9,7 @@ PROJECT_VERSION="0.1.0-alpha.5"
 
 # Déterminer le dossier racine du projet (un cran au-dessus de bin/)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+load_common_shell || true
 
 # Indiquer à ShellCheck où se trouve le fichier source
 # shellcheck source=../lib/helpers.sh
@@ -31,6 +32,7 @@ show_menu() {
   echo "1) Afficher la version"
   echo "2) Ping (test simple)"
   echo "3) Afficher l'environnement détecté"
+  echo "4) Outils (Common Shell)"
   echo "0) Quitter"
   echo
   printf "Votre choix : "
@@ -53,6 +55,9 @@ handle_choice() {
     3)
       echo
       echo "Environnement détecté : $(detect_env)"
+      ;;
+    4)
+      menu_tools
       ;;
     0)
       echo
@@ -102,6 +107,71 @@ handle_cli_args() {
   esac
 }
 
+menu_tools() {
+  echo "-------------------------"
+  echo "   Outils (Common Shell)"
+  echo "-------------------------"
+
+  # Si COMMON_SHELL_SCRIPTS n'est pas défini, on ne peut rien lancer
+  if [ -z "${COMMON_SHELL_SCRIPTS-}" ]; then
+    echo "Common Shell non disponible (COMMON_SHELL_SCRIPTS non défini)."
+    echo "Assurez-vous que 0033-BASH-Common_Shell est installé et chargé."
+    echo
+    echo "Appuyez sur Entrée pour revenir au menu principal..."
+    read -r _
+    return 0
+  fi
+
+  echo "1) Infos système"
+  echo "2) Espace disque"
+  echo "3) IP locales"
+  echo "4) Ping test (8.8.8.8)"
+  echo "0) Retour au menu principal"
+  echo
+  printf "Votre choix (Outils) : "
+  read -r tchoice
+
+  case "$tchoice" in
+    1)
+      if [ -x "$COMMON_SHELL_SCRIPTS/system/sysinfo.sh" ]; then
+        "$COMMON_SHELL_SCRIPTS/system/sysinfo.sh"
+      else
+        echo "Script sysinfo.sh introuvable."
+      fi
+      ;;
+    2)
+      if [ -x "$COMMON_SHELL_SCRIPTS/system/disk.sh" ]; then
+        "$COMMON_SHELL_SCRIPTS/system/disk.sh"
+      else
+        echo "Script disk.sh introuvable."
+      fi
+      ;;
+    3)
+      if [ -x "$COMMON_SHELL_SCRIPTS/network/ip.sh" ]; then
+        "$COMMON_SHELL_SCRIPTS/network/ip.sh"
+      else
+        echo "Script ip.sh introuvable."
+      fi
+      ;;
+    4)
+      if [ -x "$COMMON_SHELL_SCRIPTS/network/pingtest.sh" ]; then
+        "$COMMON_SHELL_SCRIPTS/network/pingtest.sh"
+      else
+        echo "Script pingtest.sh introuvable."
+      fi
+      ;;
+    0)
+      echo "Retour au menu principal."
+      ;;
+    *)
+      echo "Choix outil invalide."
+      ;;
+  esac
+
+  echo
+  echo "Appuyez sur Entrée pour revenir au menu Outils..."
+  read -r _
+}
 
 main() {
   # Si un argument est passé (mode test / non interactif)

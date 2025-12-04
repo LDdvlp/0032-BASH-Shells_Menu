@@ -28,3 +28,13 @@ EOF
   [ "$status" -eq 0 ]
   [[ "$output" =~ "Environnement détecté :" ]]
 }
+
+@test "menu outils fonctionne même sans Common Shell" {
+  run bash bin/menu.sh <<EOF
+5
+0
+EOF
+
+  [ "$status" -eq 0 ]
+  [[ "$output" =~ "Outils (Common Shell)" ]]
+}
