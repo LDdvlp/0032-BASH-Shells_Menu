@@ -3,7 +3,7 @@ name: Update README version
 on:
   push:
     tags:
-      - 'v*'   # se déclenche pour toute version
+      - 'v*'   # se déclenche pour tous les tags du type v0.1.0-...
 
 jobs:
   update-readme:
@@ -12,40 +12,58 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Extract new version
+      - name: Extract new version from tag
         id: version
         run: |
           NEW_VERSION="${GITHUB_REF#refs/tags/}"
-          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
 
-      - name: Extract old version
-        id: old
+      - name: Extract previous version line from README
+        id: prev
         run: |
-          OLD_VERSION=$(grep -oE 'Version actuelle : `v[^`]+`' README.md | sed 's/Version actuelle : `//; s/`//')
-          echo "old=$OLD_VERSION" >> $GITHUB_OUTPUT
+          # On récupère la ligne complète "Version actuelle : ..."
+          PREV_LINE=$(grep "^Version actuelle :" README.md || true)
 
-      - name: Update README version + append to history
+          # Si on a trouvé une ligne, on l'extrait proprement
+          if [ -n "$PREV_LINE" ]; then
+            # Exemple : "Version actuelle : v0.1.0-alpha.9-test (blabla)"
+            # On récupère juste la partie après "Version actuelle : "
+            PREV_ENTRY=${PREV_LINE#Version actuelle : }
+            echo "entry=$PREV_ENTRY" >> "$GITHUB_OUTPUT"
+          else
+            echo "entry=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Update README (historique + version actuelle)
         run: |
           NEW_VERSION="${{ steps.version.outputs.version }}"
-          OLD_VERSION="${{ steps.old.outputs.old }}"
+          PREV_ENTRY="${{ steps.prev.outputs.entry }}"
 
-          # 1. Déplacer l'ancienne version dans l'historique
-          sed -i "s|## Historique des versions|## Historique des versions\n\n- \`${OLD_VERSION}\`|g" README.md
+          echo "Nouvelle version : $NEW_VERSION"
+          echo "Ancienne entrée : $PREV_ENTRY"
 
-          # 2. Remplacer Version actuelle par la nouvelle
-          sed -i "s|Version actuelle : \`.*\`|Version actuelle : \`${NEW_VERSION}\`|g" README.md
-      
-      - name: Commit changes
+          # 1) Si on a une ancienne entrée, on l'ajoute en haut de l'historique
+          if [ -n "$PREV_ENTRY" ]; then
+            # On vérifie qu'elle n'est pas déjà dans la liste
+            if ! grep -Fq "$PREV_ENTRY" README.md; then
+              # On insère PREV_ENTRY juste après la ligne "Historique rapide des versions"
+              # On travaille en mode bloc (-0) pour remplacer une seule fois
+              perl -0pi -e 's/(Historique rapide des versions.*\n)/$1'"$PREV_ENTRY\n"'/' README.md
+            fi
+          fi
+
+          # 2) On met à jour la ligne "Version actuelle : ..."
+          # On remplace toute la ligne par "Version actuelle : <nouvelle version>"
+          perl -pi -e 's/^Version actuelle : .*/Version actuelle : '"$NEW_VERSION"'/' README.md
+
+      - name: Commit updated README
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
           git add README.md
           git commit -m "docs(readme): mise à jour automatique version -> ${{ steps.version.outputs.version }}"
-
-          # On pousse explicitement vers la branche main
           git push origin HEAD:main
-
