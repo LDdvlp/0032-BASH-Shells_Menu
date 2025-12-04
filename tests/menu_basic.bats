@@ -3,9 +3,14 @@
 @test "menu --version affiche la version et sort en 0" {
   run bash bin/menu.sh --version
   [ "$status" -eq 0 ]
-  [[ "$output" =~ 0.1.0-alpha.5 ]]
 
+  # On récupère la version attendue depuis git, comme dans le script
+  raw_version="$(git describe --tags --abbrev=0 2>/dev/null || echo 'dev')"
+  expected_version="${raw_version#v}"
+
+  [[ "$output" =~ "$expected_version" ]]
 }
+
 
 @test "menu --help affiche un texte d'aide" {
   run bash bin/menu.sh --help

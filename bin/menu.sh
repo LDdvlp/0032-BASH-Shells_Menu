@@ -6,7 +6,9 @@ set -euo pipefail
 
 PROJECT_NAME="0032-BASH-Shells_Menu"
 # Récupère la version depuis les tags git (fallback : dev)
-PROJECT_VERSION="$(git describe --tags --abbrev=0 2>/dev/null || echo 'dev')"
+RAW_VERSION="$(git describe --tags --abbrev=0 2>/dev/null || echo 'dev')"
+PROJECT_VERSION="${RAW_VERSION#v}"
+
 
 
 # Déterminer le dossier racine du projet (un cran au-dessus de bin/)
