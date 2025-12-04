@@ -1,0 +1,47 @@
+name: Update README version
+
+on:
+  push:
+    tags:
+      - 'v*'   # se déclenche pour toute version
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract new version
+        id: version
+        run: |
+          NEW_VERSION="${GITHUB_REF#refs/tags/}"
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Extract old version
+        id: old
+        run: |
+          OLD_VERSION=$(grep -oE 'Version actuelle : `v[^`]+`' README.md | sed 's/Version actuelle : `//; s/`//')
+          echo "old=$OLD_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Update README version + append to history
+        run: |
+          NEW_VERSION="${{ steps.version.outputs.version }}"
+          OLD_VERSION="${{ steps.old.outputs.old }}"
+
+          # 1. Déplacer l'ancienne version dans l'historique
+          sed -i "s|## Historique des versions|## Historique des versions\n\n- \`${OLD_VERSION}\`|g" README.md
+
+          # 2. Remplacer Version actuelle par la nouvelle
+          sed -i "s|Version actuelle : \`.*\`|Version actuelle : \`${NEW_VERSION}\`|g" README.md
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "docs(readme): mise à jour automatique version -> ${{ steps.version.outputs.version }}"
+          git push

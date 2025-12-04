@@ -5,7 +5,9 @@
 set -euo pipefail
 
 PROJECT_NAME="0032-BASH-Shells_Menu"
-PROJECT_VERSION="0.1.0-alpha.5"
+# Récupère la version depuis les tags git (fallback : dev)
+PROJECT_VERSION="$(git describe --tags --abbrev=0 2>/dev/null || echo 'dev')"
+
 
 # Déterminer le dossier racine du projet (un cran au-dessus de bin/)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -83,7 +85,7 @@ handle_cli_args() {
 
   case "$arg" in
     --version)
-      echo "$PROJECT_VERSION"
+      echo "$PROJECT_NAME $PROJECT_VERSION"
       exit 0
       ;;
     --help|-h)
