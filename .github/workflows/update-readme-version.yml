@@ -47,17 +47,24 @@ jobs:
 
           # 1) Si on a une ancienne entrée, on l'ajoute en haut de l'historique
           if [ -n "$PREV_ENTRY" ]; then
-            # On vérifie qu'elle n'est pas déjà dans la liste
             if ! grep -Fq "$PREV_ENTRY" README.md; then
-              # On insère PREV_ENTRY juste après la ligne "Historique rapide des versions"
-              # On travaille en mode bloc (-0) pour remplacer une seule fois
-              perl -0pi -e 's/(Historique rapide des versions.*\n)/$1'"$PREV_ENTRY\n"'/' README.md
+              awk -v prev="$PREV_ENTRY" '
+                BEGIN { done=0 }
+                {
+                  print $0
+                  if (!done && $0 ~ /^Historique rapide des versions$/) {
+                    print prev
+                    done=1
+                  }
+                }
+              ' README.md > README.tmp
+              mv README.tmp README.md
             fi
           fi
 
           # 2) On met à jour la ligne "Version actuelle : ..."
-          # On remplace toute la ligne par "Version actuelle : <nouvelle version>"
-          perl -pi -e 's/^Version actuelle : .*/Version actuelle : '"$NEW_VERSION"'/' README.md
+          sed -i "s/^Version actuelle :.*/Version actuelle : $NEW_VERSION/" README.md
+
 
       - name: Commit updated README
         run: |
