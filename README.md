@@ -54,7 +54,7 @@ bin/menu.sh
 
 ## Version
 
-Version actuelle : v0.1.0-alpha.9-test (sous-menu Outils + intégration Common Shell LDbug).
+Version actuelle : v0.1.0-alpha.10-test
 
 
 ### Historique rapide des versions
